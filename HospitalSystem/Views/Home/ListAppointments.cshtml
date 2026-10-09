@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Appointment>
+<div class="container my-5">
+    <!-- العنوان الرئيسي فوق الجدول -->
+    <h1 class="text-center text-white fw-bold mb-4">All Appointments</h1>
+    <!-- الحاوية البيضاء للجدول -->
+    <div class="card border-0 rounded-4 shadow-lg p-4 bg-white">
+        <div class="table-responsive">
+            <table class="table table-borderless align-middle mb-0 custom-appointments-table">
+                <thead>
+                    <tr class="border-bottom text-dark fw-bold">
+                        <th scope="col" class="py-3">Patient</th>
+                        <th scope="col" class="py-3">Doctor</th>
+                        <th scope="col" class="py-3">Specialization</th>
+                        <th scope="col" class="py-3">Date</th>
+                        <th scope="col" class="py-3">Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr class="border-bottom-light">
+                                <td class="py-3 text-dark">@item.PatientName</td>
+                                <td class="py-3 text-dark">@(item.doctor.Name ?? "N/A")</td>
+                                <td class="py-3 text-dark">@(item.doctor.specialization.Name ?? "N/A")</td>
+                                <td class="py-3 text-dark">@item.Day.ToString("yyyy-MM-dd")</td>
+                                <td class="py-3 text-dark">@item.Time</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center py-4 text-muted">No appointments found.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
